@@ -5,6 +5,11 @@ var passwordUpperCase = undefined;
 var passwordNumerals = undefined;
 var passwordSpecialChars = undefined;
 
+var lowerCase = 'abcdefghijklmnopqrstuvwxyz'
+var upperCase = lowerCase.toUpperCase
+var numerals = '1234567890'
+var specialChars = '!@#$%^&*()'
+
 // Get user input for password specifications
 document.querySelector('#generate').addEventListener('click', function() {
   
@@ -14,68 +19,92 @@ document.querySelector('#generate').addEventListener('click', function() {
     window.alert("You need to provide a number between 8 and 128. Please try again.");
     return passwordLength;
   }
-
-  // Get user input for password lower case
-  passwordLowerCase = prompt('Would you like the password to include lower case letters? Enter "Yes" or "No" to proceed.');
   
-  // Convert user passwordLowerCase prompt response string to lower case
-  passwordLowerCase = passwordLowerCase.toLowerCase
+  console.log(passwordLength);
+
+  // Get user input for password lower case and convert to lower case
+  getPasswordLowerCase = prompt('Would you like the password to include lower case letters? Enter "Yes" or "No" to proceed.');
+
+  // change value of passwordLowerCase to lower case string of getPasswordLowerCase 
+  passwordLowerCase = getPasswordLowerCase.toLowerCase();
 
   // Check value of passwordLowerCase and convert to true or false value
-  if (passwordLowerCase === "" || passwordLowerCase === null) {
-    window.alert("You need to provide a valid response. Please try again.");
-  } else if (passwordLowerCase === "yes") {
-    passwordLowerCase = !true;
+  if (passwordLowerCase === '' || passwordLowerCase === null || (passwordLowerCase !== 'yes' && passwordLowerCase !== 'no')) {
+    alert("You need to provide a valid response. Please try again.");
+    return;
+  }  else if (passwordLowerCase === "yes") {
+    passwordLowerCase = true;
   } else {
-    passwordLowerCase = !false;
+    passwordLowerCase = false;
   }
+  
+  console.log(passwordLowerCase);
 
   // Get user input for password upper case
-  passwordUpperCase = prompt('Would you like the password to include upper case letters? Enter "Yes" or "No" to proceed.');
+  getPasswordUpperCase = prompt('Would you like the password to include upper case letters? Enter "Yes" or "No" to proceed.');
   
   // Convert user passwordLowerCase prompt response string to lower case
-  passwordUpperCase = passwordUpperCase.toLowerCase
+  passwordUpperCase = getPasswordUpperCase.toLowerCase();
 
   // Check value of passwordLowerCase and convert to true or false value
-  if (passwordUpperCase === "" || passwordUpperCase === null) {
+  if (passwordUpperCase === "" || passwordUpperCase === null || (passwordUpperCase !== 'yes' && passwordUpperCase !== 'no')) {
     window.alert("You need to provide a valid response. Please try again.");
+    return;
   } else if (passwordUpperCase === "yes") {
-    passwordUpperCase = !true;
+    passwordUpperCase = true;
   } else {
-    passwordUpperCase = !false;
+    passwordUpperCase = false;
   }
+
+  console.log(passwordUpperCase);
 
   // Get user input for password numerals
-  passwordNumerals = prompt('Would you like the password to include numbers? Enter "Yes" or "No" to proceed.');
+  getPasswordNumerals = prompt('Would you like the password to include numbers? Enter "Yes" or "No" to proceed.');
   
   // Convert user passwordNumerals prompt response string to lower case
-  passwordNumerals = passwordNumerals.toLowerCase
+  passwordNumerals = getPasswordNumerals.toLowerCase();
 
   // Check value of passwordNumerals and convert to true or false value
-  if (passwordNumerals === "" || passwordNumerals === null) {
+  if (passwordNumerals === "" || passwordNumerals === null || (passwordNumerals !== 'yes' && passwordNumerals !== 'no')) {
     window.alert("You need to provide a valid response. Please try again.");
+    return;
   } else if (passwordNumerals === "yes") {
-    passwordNumerals = !true;
+    passwordNumerals = true;
   } else {
-    passwordNumerals = !false;
+    passwordNumerals = false;
   }
 
+  console.log(passwordNumerals);
+
   // Get user input for password special characters
-  passwordSpecialChars = prompt('Would you like the password to include special characters? Enter "Yes" or "No" to proceed.');
+  getPasswordSpecialChars = prompt('Would you like the password to include special characters? Enter "Yes" or "No" to proceed.');
   
   // Convert user passwordSpecialChars prompt response string to lower case
-  passwordSpecialChars = passwordSpecialChars.toLowerCase
+  passwordSpecialChars = getPasswordSpecialChars.toLowerCase();
 
   // Check value of passwordSpecialChars and convert to true or false value
-  if (passwordSpecialChars === "" || passwordSpecialChars === null) {
+  if (passwordSpecialChars === "" || passwordSpecialChars === null || (passwordSpecialChars !== 'yes' && passwordSpecialChars !== 'no')) {
     window.alert("You need to provide a valid response. Please try again.");
+    return;
   } else if (passwordSpecialChars === "yes") {
-    passwordSpecialChars = !true;
+    passwordSpecialChars = true;
   } else {
-    passwordSpecialChars = !false;
+    passwordSpecialChars = false;
+  }
+
+  console.log(passwordSpecialChars);
+
+  // Confirm that at least one character type was selected
+  if (passwordLowerCase === false && passwordLowerCase === false && passwordNumerals === false && passwordSpecialChars === false) {
+    alert("You must include at least one character type. Please try again.");
   }
 
 });
+
+// Randomizer
+function randomizer(num) {
+  return Math.floor(Math.random() * num);
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -91,27 +120,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-
-  /* 
-
-    // Get user input for lowercase letters
-    var getPasswordLowerCase = window.prompt('Would you like the password to include lowercase letters? Enter "Yes" or "No" to proceed.');
-
-    getPasswordLowerCase = getPasswordLowerCase.toLowerCase();
-
-    // confirm valid input from user for lowercase letters
-    if (getPasswordLowerCase === "" || getPasswordLowerCase === null) {
-      window.alert("You need to provide a valid response. Please try again.");
-      return getPasswordLowerCase();
-    } else if (getPasswordLowerCase === "yes") {
-      passwordLowerCase = true;
-    } else {
-      passwordLowerCase = false;
-    }
-
-  console.log(passwordLowerCase);
-
-  });
-};
-*/
