@@ -39,7 +39,7 @@ document.querySelector('#generate').addEventListener('click', function() {
     passwordLowerCase = false;
   }
 
-  if (passwordLowerCase = true) {
+  if (passwordLowerCase === true) {
     passwordResult += lowerCase.charAt(randomizer(lowerCase));
   }
   
@@ -59,7 +59,7 @@ document.querySelector('#generate').addEventListener('click', function() {
     passwordUpperCase = false;
   }
 
-  if (passwordUpperCase = true) {
+  if (passwordUpperCase === true) {
     passwordResult += upperCase.charAt(randomizer(upperCase));
   }
 
@@ -79,7 +79,7 @@ document.querySelector('#generate').addEventListener('click', function() {
     passwordNumerals = false;
   }
 
-  if (passwordNumerals = true) {
+  if (passwordNumerals === true) {
     passwordResult += numerals.charAt(randomizer(numerals));
   }
 
@@ -99,7 +99,7 @@ document.querySelector('#generate').addEventListener('click', function() {
     passwordSpecialChars = false;
   }
 
-  if (passwordSpecialChars = true) {
+  if (passwordSpecialChars === true) {
     passwordResult += specialChars.charAt(randomizer(specialChars));
   }
 
@@ -124,7 +124,7 @@ document.querySelector('#generate').addEventListener('click', function() {
     passwordCharacterSelection += specialChars;
   }
 
-  for (var i = (passwordLength - passwordResult.length); i < passwordLength; i++) {
+  for (var i = passwordResult.length; i < passwordLength; i++) {
     passwordResult += passwordCharacterSelection.charAt(randomizer(passwordCharacterSelection));
   }
 
