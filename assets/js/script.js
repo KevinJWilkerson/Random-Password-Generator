@@ -4,11 +4,14 @@ var passwordLowerCase = undefined;
 var passwordUpperCase = undefined;
 var passwordNumerals = undefined;
 var passwordSpecialChars = undefined;
+var passwordCharacterSelection = '';
+var passwordResult = '';
 
 var lowerCase = 'abcdefghijklmnopqrstuvwxyz'
-var upperCase = lowerCase.toUpperCase
+var upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 var numerals = '1234567890'
 var specialChars = '!@#$%^&*()'
+
 
 // Get user input for password specifications
 document.querySelector('#generate').addEventListener('click', function() {
@@ -20,8 +23,6 @@ document.querySelector('#generate').addEventListener('click', function() {
     return passwordLength;
   }
   
-  console.log(passwordLength);
-
   // Get user input for password lower case and convert to lower case
   getPasswordLowerCase = prompt('Would you like the password to include lower case letters? Enter "Yes" or "No" to proceed.');
 
@@ -37,9 +38,11 @@ document.querySelector('#generate').addEventListener('click', function() {
   } else {
     passwordLowerCase = false;
   }
-  
-  console.log(passwordLowerCase);
 
+  if (passwordLowerCase = true) {
+    passwordResult += lowerCase.charAt(randomizer(lowerCase));
+  }
+  
   // Get user input for password upper case
   getPasswordUpperCase = prompt('Would you like the password to include upper case letters? Enter "Yes" or "No" to proceed.');
   
@@ -56,7 +59,9 @@ document.querySelector('#generate').addEventListener('click', function() {
     passwordUpperCase = false;
   }
 
-  console.log(passwordUpperCase);
+  if (passwordUpperCase = true) {
+    passwordResult += upperCase.charAt(randomizer(upperCase));
+  }
 
   // Get user input for password numerals
   getPasswordNumerals = prompt('Would you like the password to include numbers? Enter "Yes" or "No" to proceed.');
@@ -74,7 +79,9 @@ document.querySelector('#generate').addEventListener('click', function() {
     passwordNumerals = false;
   }
 
-  console.log(passwordNumerals);
+  if (passwordNumerals = true) {
+    passwordResult += numerals.charAt(randomizer(numerals));
+  }
 
   // Get user input for password special characters
   getPasswordSpecialChars = prompt('Would you like the password to include special characters? Enter "Yes" or "No" to proceed.');
@@ -92,18 +99,52 @@ document.querySelector('#generate').addEventListener('click', function() {
     passwordSpecialChars = false;
   }
 
-  console.log(passwordSpecialChars);
+  if (passwordSpecialChars = true) {
+    passwordResult += specialChars.charAt(randomizer(specialChars));
+  }
 
   // Confirm that at least one character type was selected
   if (passwordLowerCase === false && passwordLowerCase === false && passwordNumerals === false && passwordSpecialChars === false) {
     alert("You must include at least one character type. Please try again.");
   }
 
+  if (passwordLowerCase === true) {
+    passwordCharacterSelection += lowerCase;
+  }
+
+  if (passwordUpperCase === true) {
+    passwordCharacterSelection += upperCase;
+  }
+
+  if (passwordNumerals === true) {
+    passwordCharacterSelection += numerals;
+  }
+
+  if (passwordSpecialChars === true) {
+    passwordCharacterSelection += specialChars;
+  }
+
+  for (var i = (passwordLength - passwordResult.length); i < passwordLength; i++) {
+    passwordResult += passwordCharacterSelection.charAt(randomizer(passwordCharacterSelection));
+  }
+
+  shuffleWord(passwordResult);
+
 });
 
 // Randomizer
 function randomizer(num) {
-  return Math.floor(Math.random() * num);
+  return Math.floor(Math.random() * num.length);
+}
+
+// Shuffler
+function shuffleWord(word){
+  var shuffledWord = '';
+  word = word.split('');
+  while (word.length > 0) {
+    shuffledWord += word.splice(word.length * Math.random() << 0, 1);
+  }
+  return shuffledWord
 }
 
 // Get references to the #generate element
@@ -111,10 +152,12 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var password = passwordResult;
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
+
+  passwordResult = '';
 
 };
 
